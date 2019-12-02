@@ -1,0 +1,19 @@
+<clr-vertical-nav [clrVerticalNavCollapsible]="true">
+  <div *ngFor="let navitem of navItems">
+    <a clrVerticalNavLink *ngIf="!isHasChild(navitem) && (!(isTitle(navitem) || isDivider(navitem)))"
+      routerLink="{{navitem.url}}" routerLinkActive="active">
+      {{navitem.name}}
+    </a>
+    <clr-vertical-nav-group routerLinkActive="active" *ngIf="isHasChild(navitem)">
+      {{navitem.name}}
+      <clr-vertical-nav-group-children *clrIfExpanded="false">
+        <div *ngFor="let cnavitem of navitem.children">
+          <a clrVerticalNavLink *ngIf="!(isTitle(cnavitem) || isDivider(cnavitem))" routerLink="{{cnavitem.url}}"
+            routerLinkActive="active">
+            {{cnavitem.name}}
+          </a>
+        </div>
+      </clr-vertical-nav-group-children>
+    </clr-vertical-nav-group>
+  </div>
+</clr-vertical-nav>
